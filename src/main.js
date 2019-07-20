@@ -7,15 +7,25 @@ import VueRouter from 'vue-router';
 // 安装路由
 Vue.use(VueRouter);
 
+import moment from 'moment';
+// 定义全局的过滤器
+Vue.filter('dataFormat',function(dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
+    return moment(dataStr).format(pattern)
+})
+
 // 导入vue-resource
 import VueResource from 'vue-resource';
 // 安装
 Vue.use(VueResource);
+
+Vue.http.options.root = 'http://www.liulongbin.top:3005';
+Vue.http.options.emulateJSON = true;
 //按需导入MINT-UI中的组件
-import { Header, Swipe, SwipeItem } from 'mint-ui';
+import { Header, Swipe, SwipeItem, Button } from 'mint-ui';
 Vue.component(Header.name,Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Button.name, Button);
 
 //导入APP根组件
 import app from './App.vue';
