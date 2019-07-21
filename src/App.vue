@@ -31,10 +31,25 @@
 </template>
 
 <script>
+import mui from './lib/mui/js/mui.js'
+export default {
+  mounted() {
+    
+    mui("header,nav").on("tap", "a", function() {
+      mui.openWindow({ url: this.href });
+    });
+  },
+}
 </script>
 
 
 <style lang="scss" scoped>
+*{
+  touch-action: pan-y;
+}
+  .mint-header{
+    z-index: 99;
+  }
   .app-container{
     padding-top: 40px;
     padding-bottom: 50px;
