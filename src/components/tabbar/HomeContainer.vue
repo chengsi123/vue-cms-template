@@ -1,14 +1,7 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <!-- 在组件中，使用v-for循环的话，一定要使用key -->
-      <mt-swipe-item v-for="item in lunbotuList" :key="item.id">
-        <img :src="item.img" alt />
-      </mt-swipe-item>
-      <!-- <mt-swipe-item>2</mt-swipe-item>
-      <mt-swipe-item>3</mt-swipe-item>-->
-    </mt-swipe>
+    <swiper :swiperlist="lunbotuList" :isfull="true"></swiper>
 
     <!-- 九宫格到六宫格改造 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -64,9 +57,10 @@
 
 <script>
 import { Toast } from "mint-ui";
+import swiper from "../subcomponents/swiper.vue"
 export default {
   data() {
-    return {
+    return {  
       lunbotuList: []
     };
   },
@@ -80,7 +74,7 @@ export default {
         .then(result => {
           // console.log(result);
 
-          // console.log(result.body);
+          console.log(result.body);
           if (result.body.status == 0) {
             this.lunbotuList = result.body.message;
             Toast("获取数据成功");
@@ -89,30 +83,15 @@ export default {
           }
         });
     }
+  },
+  components:{
+    swiper
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-.mint-swipe {
-  height: 200px;
 
-  .mint-swipe-item {
-    &:nth-child(1) {
-        background-color: red;
-    }
-    &:nth-child(2) {
-        background-color: blue;
-    }
-    &:nth-child(3) {
-        background-color: cyan;
-    }
-    img{
-        width: 100%;
-        height: 100%;
-    }
-    }
-}
 .mui-grid-view.mui-grid-9 {
     background-color: #fff;
     border: 0;
